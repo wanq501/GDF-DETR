@@ -1,5 +1,5 @@
 <h1> 
-  <p align=center> HFTNet: Hierarchical Frequency Transformer Network for Small Drone Detection in Cluttered Scenes </p>
+  <p align=center> GDF-DETR: Gated Dual-Frequency Detection Transformer for Distant Drone Detection in Cluttered Scenes </p>
 <div align="center">
 
 ![Python 3.9](https://img.shields.io/badge/python-3.9-g)
@@ -30,7 +30,7 @@
   </thead>
   <tbody align="center">
     <tr>
-      <td>HFTNet</td>
+      <td>GDF-DETR</td>
       <td>DUT-Plus</td>
       <td>640</td>
       <td>200</td>
@@ -39,10 +39,10 @@
       <td>62.9</td>
       <td>92.9</td>
       <td>71.4</td>
-      <td><a href="https://pan.baidu.com/s/1p7O-9cWDeccbmRsk5uOzTg?pwd=9tdj">HFTNet_DUT-Plus.pt</a> (code: 9tdj)</td>
+      <td><a href="https://pan.baidu.com/s/1p7O-9cWDeccbmRsk5uOzTg?pwd=9tdj">GDF-DETR_DUT-Plus.pt</a> (code: 9tdj)</td>
     </tr>
     <tr>
-      <td>HFTNet</td>
+      <td>GDF-DETR</td>
       <td>Det-Fly</td>
       <td>640</td>
       <td>200</td>
@@ -51,7 +51,7 @@
       <td>63.3</td>
       <td>97.1</td>
       <td>72.1</td>
-      <td><a href="https://pan.baidu.com/s/14chz4BlkGzTs_2dqx9JTeQ?pwd=ha76">HFTNet_Det-Fly.pt</a> (code: ha76)</td>
+      <td><a href="https://pan.baidu.com/s/14chz4BlkGzTs_2dqx9JTeQ?pwd=ha76">GDF-DETR_Det-Fly.pt</a> (code: ha76)</td>
     </tr>
   </tbody>
 </table>
@@ -106,15 +106,15 @@ All components are available.
 | Evaluation, test, and detection scripts | Available |
 | TensorRT export script (FP16 engine with layer normalization in FP32, optional INT8 calibration) | Available |
 | Dataset splits of DUT-Plus and Det-Fly | Available |
-| Source code of HFEN, DIFI, BDFN, and SOIoU, and the training pipeline | Available |
+| Source code of HDAB, GDFI, BAFN, and SAIoU, and the training pipeline | Available |
 
 ## Dependencies and Installation 
 
 1. Clone and enter the repo.
 
    ```shell
-   git clone https://github.com/wanq501/HFTNet.git
-   cd HFTNet
+   git clone https://github.com/wanq501/GDF-DETR.git
+   cd GDF-DETR
    ```
 
 2. Install dependencies
@@ -131,37 +131,37 @@ All components are available.
 
 ## Training and Evaluation 
 
-1. Training (the defaults reproduce the paper: SOIoU box loss, IoU_inner query target, batch 42, 200 epochs)
+1. Training (the defaults reproduce the paper: SAIoU box loss, IoU_inner query target, batch 42, 200 epochs)
 
    ```shell
-   python tools/train.py --data path/to/DUT-Plus.yaml --name HFTNet-DUT-Plus --device 0
+   python tools/train.py --data path/to/DUT-Plus.yaml --name GDF-DETR-DUT-Plus --device 0
    ```
 
 2. Evaluation
 
    ```shell
-   python tools/val.py --weights HFTNet_DUT-Plus.pt --data path/to/DUT-Plus.yaml --split val --device 0
+   python tools/val.py --weights GDF-DETR_DUT-Plus.pt --data path/to/DUT-Plus.yaml --split val --device 0
    ```
 
 3. Test
 
    ```shell
-   python tools/test.py --weights HFTNet_DUT-Plus.pt --data path/to/DUT-Plus.yaml --device 0
+   python tools/test.py --weights GDF-DETR_DUT-Plus.pt --data path/to/DUT-Plus.yaml --device 0
    ```
 
 4. Detect
 
    ```shell
-   python tools/detect.py --weights HFTNet_DUT-Plus.pt --source path/to/images --conf 0.25
+   python tools/detect.py --weights GDF-DETR_DUT-Plus.pt --source path/to/images --conf 0.25
    ```
 
 5. Export to TensorRT FP16
 
    ```shell
-   python tools/export.py --weights HFTNet_DUT-Plus.pt --format engine --half
+   python tools/export.py --weights GDF-DETR_DUT-Plus.pt --format engine --half
    ```
 
-   The engine is saved next to the weights as `HFTNet_DUT-Plus_fp16.engine`. An exported ONNX file can also be passed to `--weights`.
+   The engine is saved next to the weights as `GDF-DETR_DUT-Plus_fp16.engine`. An exported ONNX file can also be passed to `--weights`.
 
 - Note: Each script includes detailed instructions on how to set parameters and use the script properly.
 
